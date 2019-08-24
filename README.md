@@ -4,4 +4,5 @@
 
 # 注意
 
-修改`AuthUtils`类中的项目信息为自己公司的信息
+* 修改`AuthUtils`类中的项目信息为自己公司的信息
+* 使用 scala-requests 库（与 Python requests 库用法相同）
