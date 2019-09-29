@@ -48,12 +48,12 @@ object WebLinksOpenApi extends App {
 
   //创建
   //@see https://github.com/lihaoyi/redquests-scala  python requests库的Scala封装版本,用法一样
-  val weblink = requests.post(s"https://www.growingio.com/api/v2/projects/$projectUid/activities", data = web, headers = postHeaders)
+  val weblink = requests.post(s"https://www.growingio.com/api/v1/projects/$projectUid/meta/activities", data = web, headers = postHeaders)
   val weblinkPrettyFormatStr = AuthUtils.jsonFormat(weblink.text())
   println(weblinkPrettyFormatStr)
 
   //查询
-  val wb = requests.get(s"https://www.growingio.com/api/v2/projects/$projectUid/activities", headers = getHeaders)
+  val wb = requests.get(s"https://www.growingio.com/api/v1/projects/$projectUid/meta/activities", headers = getHeaders)
   val wbPrettyFormatStr = AuthUtils.jsonFormat(wb.text())
   println(wbPrettyFormatStr)
 }
