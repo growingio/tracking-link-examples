@@ -19,6 +19,15 @@ object WebLinksOpenApi extends App {
   }
 
   /**
+   * GET请求的headers
+   */
+  def getHeaders = {
+    val auth = AuthUtils.authToken(secret, projectUid, ai, time) //获取验证auth
+    val token = AuthUtils.getToken(ai, projectUid, time, auth, `X-Client-Id`) //获取token
+    Map("Authorization" -> token, "X-Client-Id" -> `X-Client-Id`)
+  }
+
+  /**
    * web 监测链接创建 App
    */
   //request body
@@ -42,4 +51,9 @@ object WebLinksOpenApi extends App {
   val weblink = requests.post(s"https://www.growingio.com/api/v2/projects/$projectUid/activities", data = web, headers = postHeaders)
   val weblinkPrettyFormatStr = AuthUtils.jsonFormat(weblink.text())
   println(weblinkPrettyFormatStr)
+
+  //查询
+  val wb = requests.get(s"https://www.growingio.com/api/v2/projects/$projectUid/activities", headers = getHeaders)
+  val wbPrettyFormatStr = AuthUtils.jsonFormat(wb.text())
+  println(wbPrettyFormatStr)
 }
